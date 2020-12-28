@@ -7,7 +7,7 @@ const models = { users }
 const connectDb = () => {
   if (connection.readyState !== 0) return
 
-  mongoose.connect(process.env.MONGO_URL as string, {
+  mongoose.connect(process.env.MONGODB_URL as string, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

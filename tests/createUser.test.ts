@@ -1,14 +1,14 @@
-import { models, connectDb, connection } from "../utils/db"
+import users from "../models/users"
+import setupDB from "./setup-tests"
 
-beforeAll(async () => await connectDb())
-afterAll(async () => await connection.close())
+setupDB("createUsers")
 
 describe("Creating user records", () => {
-  it("should insert a doc into collection", async () => {
-    const users = models.users
+  it("should insert a doc into collection", async (done) => {
     await users.create({ name: "John" })
 
     const insertedUser = await users.findOne({ name: "John" })
     expect(insertedUser?.name).toEqual("John")
+    done()
   })
 })
