@@ -1,8 +1,8 @@
 import mongoose from "mongoose"
-import users from "../models/users"
+import User from "../models/user"
 
 const connection = mongoose.connection
-const models = { users }
+const models = { User }
 
 const connectDb = () => {
   if (connection.readyState !== 0) return

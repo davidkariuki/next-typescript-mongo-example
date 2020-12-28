@@ -1,4 +1,4 @@
-import User, { IUser } from "../models/users"
+import User, { IUser } from "../models/user"
 import setupDB from "./setup-tests"
 
 setupDB("validateUsers")
