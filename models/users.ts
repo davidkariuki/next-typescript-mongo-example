@@ -7,7 +7,11 @@ export interface IUser extends Document {
 
 const schema = new Schema(
   {
-    name: { type: String, required: true },
+    name: {
+      type: String,
+      required: [true, "Name is required"],
+      minlength: [3, "Name must be longer than 2 characters"],
+    },
     postCount: { type: Number, required: true, default: 0 },
   },
   { timestamps: true }
