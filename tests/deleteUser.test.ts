@@ -20,8 +20,8 @@ describe("Deleting a user", () => {
     expect(foundUser).toBeNull()
   })
 
-  it("class method remove", async () => {
-    await users.remove({ _id: james.id })
+  it("class method deleteOne", async () => {
+    await users.deleteOne({ _id: james.id })
     const foundUser = await users.findOne({ name: "James" })
 
     expect(foundUser).toBeNull()

@@ -9,6 +9,6 @@ describe("Creating user records", () => {
     await users.create({ name: "John" })
 
     const insertedUser = await users.findOne({ name: "John" })
-    expect(insertedUser.name).toEqual("John")
+    expect(insertedUser?.name).toEqual("John")
   })
 })
