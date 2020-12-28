@@ -8,7 +8,7 @@ describe("Updating a user", () => {
   const newName = "Jamie"
 
   beforeEach(async () => {
-    james = await User.create({ name: "James", postCount: 0 })
+    james = await User.create({ name: "James", likes: 0 })
   })
 
   it("model instance assign and save", async (done) => {
@@ -53,11 +53,11 @@ describe("Updating a user", () => {
     done()
   })
 
-  it("increments postCount by one", async (done) => {
-    await User.updateOne({ _id: james._id }, { $inc: { postCount: 1 } })
+  it("increments likes by one", async (done) => {
+    await User.updateOne({ _id: james._id }, { $inc: { likes: 10 } })
     const jamie = await User.findOne({ _id: james._id })
 
-    expect(jamie?.postCount).toEqual(1)
+    expect(jamie?.likes).toEqual(10)
     done()
   })
 })

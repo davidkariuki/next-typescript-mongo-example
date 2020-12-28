@@ -1,9 +1,10 @@
-import mongoose, { Types, Schema, Document } from "mongoose"
+import { model, Types, Schema, Document } from "mongoose"
 import Post, { IPost } from "./post"
 
 export interface IUser extends Document {
   name: string
   postCount?: number
+  likes?: number
   posts?: Types.Array<IPost>
 }
 
@@ -14,11 +15,15 @@ const schema = new Schema(
       required: [true, "Name is required"],
       minlength: [3, "Name must be longer than 2 characters"],
     },
-    postCount: { type: Number, required: true, default: 0 },
+    likes: { type: Number, default: 0 },
     posts: [Post],
   },
   { timestamps: true }
 )
+
+schema.virtual("postCount").get(function (this: IUser) {
+  return this?.posts?.length
+})
 
 schema.set("toJSON", {
   virtuals: true,
@@ -28,4 +33,4 @@ schema.set("toJSON", {
   },
 })
 
-export default mongoose.model<IUser>("users", schema)
+export default model<IUser>("users", schema)
