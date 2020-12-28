@@ -6,6 +6,7 @@ const config: Config.InitialOptions = {
   verbose: true,
   preset: "@shelf/jest-mongodb",
   testEnvironment: "node",
+  watchPathIgnorePatterns: ["<rootDir>/globalConfig.json"],
 }
 
 export default config

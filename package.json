@@ -6,7 +6,7 @@
     "dev": "NODE_OPTIONS='--inspect'  next dev -p 3011",
     "build": "next build",
     "start": "next start",
-    "test": "jest --watchAll"
+    "test": "jest --watch"
   },
   "dependencies": {
     "mongoose": "^5.11.8",
