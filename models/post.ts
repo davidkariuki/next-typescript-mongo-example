@@ -4,8 +4,8 @@ export interface IPost extends Types.Subdocument {
   title: string
 }
 
-const schema = new Schema({
+const PostSchema = new Schema({
   title: { type: String, required: [true, "Title is required"] },
 })
 
-export default schema
+export default PostSchema

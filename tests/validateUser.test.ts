@@ -1,18 +1,18 @@
-import User, { IUser } from "../models/user"
+import User, { UserDocument } from "../models/user"
 import setupDB from "./setup-tests"
 
 setupDB("validateUsers")
 
 describe("Validating a user", () => {
   it("requires a name", () => {
-    const user: IUser = new User({ name: undefined })
+    const user: UserDocument = new User({ name: undefined })
     const valdationResult = user.validateSync()
 
     expect(valdationResult?.message).toMatch("Name is required")
   })
 
   it("requires a name longer than 2 characters", () => {
-    const user: IUser = new User({ name: "Bo" })
+    const user: UserDocument = new User({ name: "Bo" })
     const valdationResult = user.validateSync()
 
     expect(valdationResult?.message).toMatch(
@@ -21,7 +21,7 @@ describe("Validating a user", () => {
   })
 
   it("disallows invalid records from being saved", async () => {
-    const user: IUser = new User({ name: "Bo" })
+    const user: UserDocument = new User({ name: "Bo" })
 
     await expect(user.save()).rejects.toThrow(
       /Name must be longer than 2 characters/

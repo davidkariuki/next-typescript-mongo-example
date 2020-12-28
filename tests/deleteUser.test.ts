@@ -1,10 +1,10 @@
-import User, { IUser } from "../models/user"
+import User, { UserDocument } from "../models/user"
 import setupDB from "./setup-tests"
 
 setupDB("deleteUsers")
 
 describe("Deleting a user", () => {
-  let james: IUser
+  let james: UserDocument
 
   beforeEach(async () => {
     james = new User({ name: "James" })

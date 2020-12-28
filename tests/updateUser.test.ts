@@ -1,10 +1,10 @@
-import User, { IUser } from "../models/user"
+import User, { UserDocument } from "../models/user"
 import setupDB from "./setup-tests"
 
 setupDB("updateUsers")
 
 describe("Updating a user", () => {
-  let james: IUser
+  let james: UserDocument
   const newName = "Jamie"
 
   beforeEach(async () => {

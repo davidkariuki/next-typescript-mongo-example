@@ -1,10 +1,10 @@
-import User, { IUser } from "../models/user"
+import User, { UserDocument } from "../models/user"
 import setupDB from "./setup-tests"
 
 setupDB("findUsers")
 
 describe("Reading User out of the database", () => {
-  let joe: IUser
+  let joe: UserDocument
 
   beforeEach(async () => {
     joe = await User.create({ name: "Joe" })

@@ -1,11 +1,11 @@
-import User, { IUser } from "../models/user"
+import User, { UserDocument } from "../models/user"
 import setupDB from "./setup-tests"
 
 setupDB("subDocument")
 
 describe("Subdocument (posts)", () => {
   it("can create a subdocument", async (done) => {
-    const joe: IUser = new User({
+    const joe: UserDocument = new User({
       name: "Joe",
       posts: [{ title: "First Post" }],
     })
@@ -17,7 +17,7 @@ describe("Subdocument (posts)", () => {
   })
 
   it("can add a subdocument to an existing record", async (done) => {
-    const joe: IUser = await User.create({ name: "Joe", posts: [] })
+    const joe: UserDocument = await User.create({ name: "Joe", posts: [] })
     joe.posts?.push({ title: "First Post" })
     await joe.save()
     const foundUser = await User.findOne({ _id: joe._id })
@@ -27,7 +27,7 @@ describe("Subdocument (posts)", () => {
   })
 
   it("can remove a subdocument from an existing record", async (done) => {
-    const joe: IUser = await User.create({
+    const joe: UserDocument = await User.create({
       name: "Joe",
       posts: [{ title: "New Post" }],
     })
