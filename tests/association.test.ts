@@ -8,7 +8,7 @@ setupDB("associations")
 describe("Associations", () => {
   let joe: UserDocument, blogPost: BlogPostDocument, comment: CommentDocument
 
-  beforeEach(async (done) => {
+  beforeEach(async () => {
     joe = new User({ name: "Joe" })
     blogPost = new BlogPost({
       title: "JS is great",
@@ -23,17 +23,15 @@ describe("Associations", () => {
     blogPost.comments?.push(comment)
 
     await Promise.all([joe.save(), blogPost.save(), comment.save()])
-    done()
   })
 
-  it("saves the relation between a user and a blog post", async (done) => {
+  it("saves the relation between a user and a blog post", async () => {
     const user = await User.findOne({ _id: joe._id }).populate("blogPosts")
 
     expect(user?.blogPosts?.[0].title).toEqual(blogPost.title)
-    done()
   })
 
-  it("saves a full relation graph", async (done) => {
+  it("saves a full relation graph", async () => {
     const user = await User.findOne({ _id: joe._id }).populate({
       path: "blogPosts",
       populate: {
@@ -47,7 +45,5 @@ describe("Associations", () => {
     expect(user?.blogPosts?.[0].title).toEqual(blogPost.title)
     expect(user?.blogPosts?.[0].comments?.[0].content).toEqual(comment.content)
     expect(user?.blogPosts?.[0].comments?.[0].user.name).toEqual(joe.name)
-
-    done()
   })
 })
